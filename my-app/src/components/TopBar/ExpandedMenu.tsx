@@ -1,5 +1,6 @@
 import React, { ChangeEvent, FC, useState } from 'react';
 import styled from 'styled-components';
+import { useSelector } from 'react-redux';
 
 import { Wrapper } from '../../styledHelpers/Components';
 import { Colors } from '../../styledHelpers/Colors';
@@ -11,16 +12,18 @@ import { IPhotosReducers } from '../../reducers/photosReducers';
 import {
     Link
 } from "react-router-dom";
-import { useSelector } from 'react-redux';
 
 
 const ExpandedMenuWrapper = styled.div`
-    margin-top:30px;
-    margin-left:200px;
+    /* margin-top:30px;
+    margin-left:200px; */
     width: 200px;
     border: 1px solid grey;
-    position:fixed;
-
+    z-index:1;
+    background-color:white; 
+    margin-top:580px;
+    margin-left:150px;
+    background-color:ghostwhite;
 `;
 
 const ExpandedMenuContent = styled.div`
@@ -68,9 +71,15 @@ const Scroll = styled.div`
 `;
 
 const ProfilePicture = styled.img`
+height:25px;
+border-radius: 50%;
+margin-left:5px;
 `;
 
-const UserName = styled.img`
+const UserName = styled.div`
+float:right;
+margin-right:45px;
+margin-top:8px;
 `;
 export const ExpandedMenu: FC = () => {
     const { usersList, photosList } = useSelector<IState, IUsersReducers & IPhotosReducers>(globalState => ({
@@ -138,15 +147,13 @@ export const ExpandedMenu: FC = () => {
                 <Link to="/contract">Real estate contract </Link>
                 </MenuItem>}
                 </Scroll>
-                <div className="newsection"></div>
+                 <div className="newsection"></div>
                 <ItemLink></ItemLink>
                 <NewSection>Account</NewSection>
-                <MenuItem>
                 <ProfilePicture src={photosList[1]?photosList[1].thumbnailUrl:""}/>
                 <UserName>
-                {usersList[0]?usersList[0].name:""}
-                </UserName>
-                </MenuItem>
+                        {usersList[0]?usersList[0].name:""}
+                </UserName>  
                 <MenuItem>
                 <img src="./media/icons/privacy.png" alt=""/>
                 <Link to="/privacy">Privacy</Link>

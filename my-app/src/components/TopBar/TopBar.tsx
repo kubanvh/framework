@@ -15,7 +15,7 @@ import {
 const InnerWrapper = styled.div`
     width: 1920px;
     /* background: ${Colors.white}; */
-    background-color: #d3d3d3;
+    background-color: ${Colors.Independence};
     height:50px;
 `;
 
@@ -23,7 +23,7 @@ const InputWrapper = styled.div`
     display: flex;
     justify-content: space-between;
     align-items: center;
-    background-color: white;
+    background-color: ${Colors.OldLavender};
     height: 40px;
     margin:5px;
 `;
@@ -58,9 +58,11 @@ const RightIcons = styled.div`
 
 const InputSearchBar = styled.input`
     width: 350px;
+    position: relative;
 `;
 const SearchIcon = styled.img`
     margin-left:5px;
+    position: absolute;
 `;
 const ExpandedIcon = styled.img`
     margin-left:200px;
@@ -74,7 +76,9 @@ export const TopBar: FC =  () => {
                 <InputWrapper>
                     <LeftIcons>
                         <LogoIcon  src="./media/icons/logo.png" alt=""/>
+                        <Link to="/mainPage">
                         <HomeIcon src="./media/icons/house2.png" alt=""/>
+                        </Link>
                             <div ref={wrapperRef}>
                                 <div onClick={toggleDropdown}>
                                    <ExpandedIcon src="./media/icons/arrow-down.png" alt=""/>

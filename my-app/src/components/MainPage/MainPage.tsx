@@ -12,12 +12,19 @@ import { TopBar } from '../TopBar/TopBar';
 import { LeftMenu } from '../LeftMenu/LeftMenu';
 import { LatestPublications } from '../ContentPage/LatestPublications';
 import { SimpleSlider } from '../ContentPage/Slider';
+import { Posts } from '../ContentPage/Posts';
+import { ErrorPage } from '../ErrorPage/ErrorPage';
+import { Workspace } from '../Workspace/Workspace';
+import { Entities } from '../Entities/Entities';
+import { Profile } from '../Profile/Profile';
 
 import { getUsers } from '../../actions/userActions';
 import { getPhotos } from '../../actions/photosActions';
 import { getTodos } from '../../actions/todosActions';
 import { getPosts} from '../../actions/postActions';
 import { getComments } from '../../actions/commentsActions';
+
+import { Colors } from '../../styledHelpers/Colors';
 
 import { type } from 'node:os';
 
@@ -27,13 +34,16 @@ type GetTodos = ReturnType<typeof getTodos>;
 type GetPosts = ReturnType<typeof getPosts>;
 type GetComments = ReturnType<typeof getComments>;
 
-const Wrapper = styled.div` `;
+const Wrapper = styled.div`
+background-color:ghostwhite;
+ `;
 
 const Content = styled.div`
+    height:100%;
     max-width: 1600px;
+/* background-color:${Colors.OldLavender}; */
     /* align-items: center; */
     /* display: flex; */
-    /* background-color:#574e4e; */
 `;
 const MainPage: FC = () => {
     const dispatch = useDispatch();
@@ -48,37 +58,43 @@ const MainPage: FC = () => {
         <Router>
             <Wrapper>
                 <TopBar/>
-                    <Content>
                     <LeftMenu />
-                    <LatestPublications/>
-                    <SimpleSlider/>
                     <Switch>
                         <Route path="/mainPage">
-                        <LatestPublications/>
+                            <Content>
+                                <LatestPublications/>
+                                <SimpleSlider/>
+                                <Posts/>
+                            </Content>    
                         </Route>
                         <Route path="/publications">
-                            publications
+                            <ErrorPage/>
                         </Route>
                         <Route path="/ecosystem">
-                            ecosystem
+                            <ErrorPage/>
                         </Route>
                         <Route path="/entities">
-                            entities
+                            <Entities/>
                         </Route>
                         <Route path="/home">
-                            home
+                            <ErrorPage/>
                         </Route>
                         <Route path="/people">
-                            People
+                            <ErrorPage/>
                         </Route>
                         <Route path="/contract">
-                            Contract
+                            <ErrorPage/>
                         </Route>
                         <Route path="/groupNorms">
-                            Group Norms
+                            <ErrorPage/>
+                        </Route>
+                        <Route path="/workspace">
+                            <Workspace />
+                        </Route>
+                        <Route path="/profile">
+                            <Profile/>
                         </Route>
                     </Switch>
-                </Content>
             </Wrapper>
         </Router>
     );

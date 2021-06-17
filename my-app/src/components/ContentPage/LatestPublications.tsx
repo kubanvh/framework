@@ -5,7 +5,7 @@ import { useSelector } from 'react-redux';
 import { IState } from '../../reducers';
 import { IUsersReducers } from '../../reducers/usersReducers';
 import { IPhotosReducers } from '../../reducers/photosReducers';
-
+import { IPostsReducers } from '../../reducers/postsReducers';
 import { Wrapper } from '../../styledHelpers/Components';
 import { Colors } from '../../styledHelpers/Colors';
 
@@ -13,14 +13,13 @@ import {
     Link
 } from "react-router-dom";
 const LatestPublicationsWrapper = styled.div`
-    /* background-color:grey; */
+    background-color:${Colors.OldLavender};
     width:1200px;
     height:400px;
     margin: 30px;
-    border: 3px solid #8596a1;
-    -webkit-box-shadow: 0px 2px 8px 1px #000000; 
-    box-shadow: 0px 2px 8px 1px #000000;
+    border: 5px solid ${Colors.Independence};
     margin-left:500px;
+    border-radius:5px;
 `;
 const BigImageContainer = styled.div`
     float: left;
@@ -83,7 +82,7 @@ const InnerWrapperRight = styled.div`
 `;
 const PublicationDataRight = styled.div`
     display:flex;
-    margin-top:20px;
+    margin-top:8px;
 `;
 const Text = styled.div`
     margin:5px;
@@ -91,17 +90,23 @@ const Text = styled.div`
     width:600px;
 
     `;
+const Text1 = styled.div`
+    margin-left:430px;
+    color: ${Colors.EnglishLavender};
+`;
 export const LatestPublications: FC = () => {
-    const { usersList, photosList } = useSelector<IState, IUsersReducers & IPhotosReducers>(globalState => ({
+    const { usersList, photosList, postsList } = useSelector<IState, IUsersReducers & IPhotosReducers & IPostsReducers> (globalState => ({
         ...globalState.photos,
-        ...globalState.users
+        ...globalState.users,
+        ...globalState.posts
     }));
     return (
         <LatestPublicationsWrapper>
                 <BigImageContainer>
-                    <BigImage src={photosList[2]?photosList[2].thumbnailUrl:""}/>
+                    <BigImage src={photosList[7]?photosList[7].thumbnailUrl:""}/>
                     <InnerWrapper>    
-                            Lorem ipsum dolor sit amet consectetur adipisicing eliteaque porro ...
+                            {/* Lorem ipsum dolor sit amet consectetur adipisicing eliteaque porro ... */}
+                            {postsList[3]?postsList[3].title:""}
                             <PublicationData>
                                 <Date><h4>7 jan. 2020</h4></Date>
                                 <AuthorPicture src={photosList[3]?photosList[3].thumbnailUrl:""}/>
@@ -114,7 +119,7 @@ export const LatestPublications: FC = () => {
                     <Publication>
                         <InnerWrapperRight>
                             <PublicationImage src={photosList[5]?photosList[5].thumbnailUrl:""}/>
-                                <Text>Lorem ipsum dolor sit amet consectetur adipisicing eliteaque porro ... and one more line for the demo</Text>
+                                <Text>{postsList[3]?postsList[3].body:""}</Text>
                             <PublicationDataRight>
                                 <Date><h4>7 jan. 2020</h4></Date>
                                 <AuthorPicture src={photosList[5]?photosList[5].thumbnailUrl:""}/>
@@ -127,7 +132,7 @@ export const LatestPublications: FC = () => {
                     <Publication>
                         <InnerWrapperRight>
                             <PublicationImage src={photosList[7]?photosList[7].thumbnailUrl:""}/>
-                                <Text>Lorem ipsum dolor sit amet consectetur adipisicing eliteaque porro ... and one more line for the demo</Text>
+                                <Text>{postsList[1]?postsList[1].body:""}</Text>
                             <PublicationDataRight>
                                 <Date><h4>7 jan. 2020</h4></Date>
                                 <AuthorPicture src={photosList[7]?photosList[7].thumbnailUrl:""}/>
@@ -140,7 +145,7 @@ export const LatestPublications: FC = () => {
                     <Publication>
                         <InnerWrapperRight>
                             <PublicationImage src={photosList[2]?photosList[2].thumbnailUrl:""}/>
-                                <Text>Lorem ipsum dolor sit amet consectetur adipisicing eliteaque porro ... and one more line for the demo</Text>
+                                <Text>{postsList[12]?postsList[12].body:""}</Text>
                             <PublicationDataRight>
                                 <Date><h4>7 jan. 2020</h4></Date>
                                 <AuthorPicture src={photosList[3]?photosList[3].thumbnailUrl:""}/>
@@ -149,6 +154,7 @@ export const LatestPublications: FC = () => {
                         </InnerWrapperRight>
                     </Publication>
                 </PublicationsContainer>
+                <Text1>See more publications</Text1>      
         </LatestPublicationsWrapper>
     );
 };
